@@ -12,7 +12,8 @@ def hex_2_rgb(h):
 
 
 def generate(width, height, color):
-
+    if width>5000 or height>5000:
+        raise Exception("No")
     try:
         c = hex_2_rgb(color)
     except:
@@ -24,7 +25,10 @@ def generate(width, height, color):
 
 
 def image_response(width, height, color):
-    b: BytesIO = generate(width, height, color)
+    try:
+        b: BytesIO = generate(width, height, color)
+    except:
+        return "An error occured"
     return Response(
         b.getvalue(),
         headers={
